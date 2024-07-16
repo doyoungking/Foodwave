@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="www.silver.dao.IF_TravelFoodDAO">
+
+	<insert id="insert" parameterType="www.silver.vo.TravelFoodVO">
+		insert into travelFood values
+		(tf_cnt.nextval,#{username},#{place},#{restaurant},#{review},default,'0',#{pw})
+	</insert>
+	
+	<select id="select" resultType="www.silver.vo.TravelFoodVO">
+		<!-- select * from travelFood -->
+		select t.* from (select sub.*, rownum as rnum from (select * from
+		travelFood order by no DESC) sub) t
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="search" resultType="www.silver.vo.TravelFoodVO" parameterType="www.silver.vo.PageVO">
+	<!--select * from travelFood where restaurant LIKE '%'||#{searchKeyword}||'%'-->
+	
+	select t.* from (select sub.*, rownum as rnum from (select * from
+		travelFood where restaurant LIKE '%'||#{searchKeyword}||'%' order by no DESC) sub) t
+		where rnum between #{startNo} and #{endNo}
+	
+	</select>
+	
+	<delete id="delete" parameterType="www.silver.vo.TravelFoodVO">
+		delete from travelFood where
+		no= #{no}
+	</delete>
+
+	<select id="selectone" resultType="www.silver.vo.TravelFoodVO">
+		select * from travelFood where
+		no= #{no}
+	</select>
+
+	<update id="update" parameterType="www.silver.vo.TravelFoodVO">
+		update travelFood set
+		username=#{username},place=#{place},restaurant=#{restaurant},review=#{review},in_date=default
+		where no = #{no}
+	</update>
+	
+	<insert id="saveFile" parameterType="String"><!-- id 제품명(쿼리명) 파라미터 받을값  -->
+		insert into tf_attach values ((select max(no) from travelFood),#{filename})
+	</insert>
+	
+	<select id="getFiles" resultType="String">
+	select filename from tf_attach where no = #{no}
+	</select>
+	
+	
+	<update id="likeup" parameterType="www.silver.vo.TravelFoodVO" >
+		update travelFood set love = love +1 where no = #{no}
+	</update>
+	
+	
+	
+	
+	<insert id="incom" parameterType="www.silver.vo.tf_commentVO">
+		insert into tf_comment values (#{c_no},#{c_user},#{tf_comment})
+	</insert>
+	
+	<select id="selcom" resultType="www.silver.vo.tf_commentVO" >
+		select * from tf_comment where c_no= #{no}
+	</select>
+	
+	<select id="getTotalcnt" resultType="int" >
+		select count(*) from travelFood
+	</select>
+	
+	<select id="getTotalcnt2" resultType="int" parameterType="www.silver.vo.PageVO">
+		select count(*) from travelFood  where restaurant LIKE '%'||#{searchKeyword}||'%'
+	</select>
+	
+	
+
+</mapper>

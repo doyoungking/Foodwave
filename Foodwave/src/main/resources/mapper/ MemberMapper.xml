@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="www.silver.dao.IF_MemberDAO">
+	
+	<select id="selectone" resultType="www.silver.vo.MemberVO" parameterType="String">
+	select * from tmember where id=#{id}
+	</select>
+
+	
+
+</mapper>
