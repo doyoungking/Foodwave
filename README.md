@@ -30,7 +30,7 @@
 
 
   
-  [맛집추천사이트_PDF](https://github.com/doyoungking/java-project/blob/main/java_project_DoMarket.pdf)
+  [맛집추천사이트_PDF](https://github.com/doyoungking/Foodwave/blob/main/%EC%97%AC%ED%96%89%EB%A7%9B%EC%A7%91%EC%B6%94%EC%B2%9C%EC%82%AC%EC%9D%B4%ED%8A%B8.pdf)
 
   
   
